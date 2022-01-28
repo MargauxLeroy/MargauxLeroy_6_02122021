@@ -41,6 +41,15 @@ a {
   text-decoration: none;
 }
 
+img {
+  object-fit: cover;
+}
+
+button {
+  border: none;
+  background: none;
+}
+
 .logo {
   height: 50px;
   margin-left: 100px;
@@ -50,7 +59,6 @@ a {
   height: 200px;
   width: 200px;
   border-radius: 99px;
-  object-fit: cover;
   box-shadow: 0 4px 12px #00000025;
 }
 
@@ -85,3 +93,9 @@ h3,
 p {
   margin: 0 0 4px 0;
 }
+/* 
+.photographer_section article,
+.photographer_section article h3,
+.photographer_section article p {
+  margin: 0 0 4px 0;
+} */

@@ -1,4 +1,4 @@
-import { Photographer } from "../models/Photographer.js";
+import { getData } from "../utils/getData.js";
 
 // async function getPhotographers() {
 //     // Penser à remplacer par les données récupérées dans le json
@@ -37,13 +37,12 @@ import { Photographer } from "../models/Photographer.js";
 //     });
 // };
 
-const getData = async () =>
-  await fetch("../../data/photographers.json").then((response) =>
-    response.json()
-  );
+// export const getData = async () =>
+//   await fetch("../../data/photographers.json").then((response) =>
+//     response.json()
+//   );
 
 const displayPhotographers = (photographers) => {
-  // console.log(photographers);
   const photographersSection = document.querySelector(".photographer_section");
 
   photographers.forEach((photographer) => {

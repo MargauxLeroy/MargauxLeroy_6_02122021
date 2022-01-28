@@ -1,4 +1,4 @@
-export class Photographer {
+class Photographer {
   constructor(data) {
     this._name = data.name;
     this._id = data.id;
@@ -47,8 +47,3 @@ export class Photographer {
       `;
   }
 }
-
-export const getData = async () =>
-  await fetch("../../data/photographers.json").then((response) =>
-    response.json()
-  );

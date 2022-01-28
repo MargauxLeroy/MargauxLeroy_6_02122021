@@ -8,6 +8,10 @@
       href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
       rel="stylesheet"
     />
+    <script
+      src="https://kit.fontawesome.com/bc0837105f.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Fisheye - photographe</title>
   </head>
   <body>
@@ -21,7 +25,27 @@
         <button class="contact_button" onclick="displayModal()">
           Contactez-moi
         </button>
+        <img class="photographer-portrait" src="" alt="" />
       </div>
+
+      <div class="galery-filters">
+        <select name="filters" id="media-select">
+          <option value="">--Trier par--</option>
+          <option value="trend">Popularité</option>
+          <option value="date">Date</option>
+          <option value="title">Titre</option>
+        </select>
+      </div>
+
+      <div class="banner">
+        <div class="likes-container">
+          <p class="total-likes"></p>
+          <i class="fas fa-heart"></i>
+        </div>
+        <p class="daily-price"></p>
+      </div>
+
+      <!-- <div class="galery-section" id="galery-section"></div> -->
     </main>
     <div id="contact_modal">
       <div class="modal">
@@ -42,6 +66,7 @@
     <script src="/scripts/utils/contactForm.js"></script>
     <!-- Pages -->
     <script type="module" src="scripts/pages/photographer.js"></script>
-    <!-- <script type="module" src="scripts/pages/index.js"></script> -->
+    <!-- Models -->
+    <script src="scripts/models/Photographer.js"></script>
   </body>
 </html>
