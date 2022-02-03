@@ -40,7 +40,7 @@ class Photographer {
             <img src="assets/photographers/${this._portrait}" class="photographer-portrait" alt="Photo du photographe">
             <h2 aria-label="Nom du photographe">${this._name}</h2>
             <h3 aria-label="Localisation">${this._city}, ${this._country}</h3> 
-            <p>${this._tagline}</p>
+            <q>${this._tagline}</q>
             <span>${this._price}€/jour</span>
           </article>
         </a>

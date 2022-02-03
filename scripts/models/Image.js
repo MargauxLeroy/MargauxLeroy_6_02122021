@@ -11,16 +11,16 @@ export class Image {
 
   get createHTML() {
     return `
-        <div id="${this._id}"> 
-            <img src="assets/images/${this._photographerId}/${this._image}" alt="#" height="300", width="350">
-            <div class="media-informations">
+        <li id="${this._id}"> 
+            <img src="assets/images/${this._photographerId}/${this._image}" alt="${this._title}" height="300", width="350">
+            <figcaption class="media-informations">
                 <h2 aria-label="Nom de la photo">${this._title}</h2>
                 <div class="likes">             
                     <p class="like-number">${this._likes}</p>
                     <button class="like-button" data-active='false'><i class="fas fa-heart"></i></button>    
                 </div>
-            </div>
-         </div>
+            </figcaption>
+         </li>
       `;
   }
 }

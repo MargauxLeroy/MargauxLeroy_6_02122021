@@ -11,18 +11,18 @@ export class Video {
 
   get createHTML() {
     return `
-            <div id="${this._id}"> 
+            <li id="${this._id}"> 
                 <video controls width="350" height="300">
-                    <source src="assets/images/${this._photographerId}/${this._video}"" type="video/webm">
+                    <source src="assets/images/${this._photographerId}/${this._video}"" type="video/webm" alt="${this._title}">
                 </video>
-                <div class="media-informations">
-                    // <h2 aria-label="Nom de la photo">${this._title}</h2>
+                <figcaption class="media-informations">
+                    <h2 aria-label="Nom de la photo">${this._title}</h2>
                     <div class="likes">             
                         <p class="like-number">${this._likes}</p>
-                        <button class="like-button data-active='false'><i class="fas fa-heart"></i></button>    
+                        <button class="like-button" data-active='false'><i class="fas fa-heart"></i></button>    
                     </div>
-                </div>
-             </div>
+                </figcaption>
+             </li>
           `;
   }
 }

@@ -10,7 +10,7 @@ header {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 90px;
+  padding: 24px 0;
 }
 
 h1 {
@@ -22,12 +22,18 @@ h2 {
   color: #d3573c;
 }
 
-h3 {
+h3,
+figcaption {
   font-size: 13px;
   color: #901c1c;
 }
 
-p {
+q {
+  text-decoration: none;
+}
+
+p,
+q {
   font-size: 10px;
   color: #000000;
 }
@@ -48,6 +54,10 @@ img {
 button {
   border: none;
   background: none;
+}
+
+li {
+  list-style: none;
 }
 
 .logo {
@@ -90,12 +100,7 @@ button {
 
 .photographer_section article,
 h3,
-p {
+p,
+q {
   margin: 0 0 4px 0;
 }
-/* 
-.photographer_section article,
-.photographer_section article h3,
-.photographer_section article p {
-  margin: 0 0 4px 0;
-} */
