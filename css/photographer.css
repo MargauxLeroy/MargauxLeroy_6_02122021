@@ -47,6 +47,15 @@
   margin: 40px 100px;
 }
 
+.galery-filters select {
+  background-color: #901c1c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 12px;
+  /* appearance: none; */ /* Supprime aussi le chevron */
+}
+
 .galery-section {
   display: flex;
   flex-wrap: wrap;
@@ -197,7 +206,8 @@ form div {
   margin-bottom: 16px;
 }
 
-form input {
+form input,
+form textarea {
   width: 98%;
   height: 48px;
   border: none;

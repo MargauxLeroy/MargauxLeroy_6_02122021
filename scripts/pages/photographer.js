@@ -46,21 +46,27 @@ const mediaGalery = (mediaArray) => {
   // Pour toutes les images...
   mediaElements.forEach((currentMedia) => {
     const mediaElement = document.getElementById(`${currentMedia._id}`);
+    console.log(mediaElement);
 
-    // Ouverture de la light-box
-    const lightBoxSection = document.querySelector(".light-box-section");
+    // // OUVERTURE DE LA LIGHT-BOX
+    // const lightBoxSection = document.querySelector(".light-box-section");
+    // // console.log(mediaElement.querySelector(".media"));
 
-    mediaElement.addEventListener("click", () => {
-      lightBoxSection.style.display = "grid";
+    // const media = mediaElement.querySelector("img");
+    // console.log(media);
 
-      const titleElement = lightBoxSection.querySelector("figcaption");
-      titleElement.innerHTML = currentMedia._title;
+    // // media.addEventListener("click", () => {
+    // mediaElement.addEventListener("click", () => {
+    //   lightBoxSection.style.display = "grid";
 
-      const imgElement = lightBoxSection.querySelector(".media");
-      // imgElement.src = currentMedia._;
-    });
+    //   const titleElement = lightBoxSection.querySelector("figcaption");
+    //   titleElement.innerHTML = currentMedia._title;
 
-    // Ajout d'un événement au clic de l'icone coeur
+    //   const imgElement = lightBoxSection.querySelector(".media");
+    //   // imgElement.src = currentMedia._;
+    // });
+
+    // EVENEMENT DU BOUTTON COEUR
     const likeButton = mediaElement.querySelector(".like-button");
     const likeNumber = mediaElement.querySelector(".like-number");
 
@@ -89,10 +95,8 @@ const handleSelect = (filteredMedias) => {
   mediaSelect.addEventListener("change", function () {
     let selectedChoice = mediaSelect.value;
 
-    const byDate = (a, b) => {
-      console.log(a.date, new Date(a.date).getTime());
-      return new Date(b.date).getTime() - new Date(a.date).getTime();
-    };
+    const byDate = (a, b) =>
+      new Date(b.date).getTime() - new Date(a.date).getTime();
     const byTrend = (a, b) => b.likes - a.likes;
     const byTitle = (a, b) => {
       if (a.title < b.title) return -1;
