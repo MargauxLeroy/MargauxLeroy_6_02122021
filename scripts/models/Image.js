@@ -11,8 +11,8 @@ export class Image {
 
   get createHTML() {
     return `
-        <li id="${this._id}"> 
-            <img src="assets/images/${this._photographerId}/${this._image}" class="media" alt="${this._title}" height="300", width="350">
+        <figure id="${this._id}" tabindex="4"> 
+            <img src="assets/images/${this._photographerId}/${this._image}" class="media" alt="${this._title}" height="300" width="350">
             <figcaption class="media-informations">
                 <h2 aria-label="Nom de la photo">${this._title}</h2>
                 <div class="likes">             
@@ -20,7 +20,7 @@ export class Image {
                     <button class="like-button" data-active='false'><i class="fas fa-heart"></i></button>    
                 </div>
             </figcaption>
-         </li>
+         </figure>
       `;
   }
 }

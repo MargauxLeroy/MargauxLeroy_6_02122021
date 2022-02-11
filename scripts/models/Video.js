@@ -11,7 +11,7 @@ export class Video {
 
   get createHTML() {
     return `
-            <li id="${this._id}"> 
+            <figure id="${this._id}" tabindex="4"> 
                 <video class="media" controls width="350" height="300">
                     <source src="assets/images/${this._photographerId}/${this._video}"" type="video/webm" alt="${this._title}">
                 </video>
@@ -22,7 +22,7 @@ export class Video {
                         <button class="like-button" data-active='false'><i class="fas fa-heart"></i></button>    
                     </div>
                 </figcaption>
-             </li>
+             </figure>
           `;
   }
 }

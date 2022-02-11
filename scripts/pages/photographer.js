@@ -30,31 +30,70 @@ const photographerContact = (photograph) => {
   });
 };
 
-//// OUVERTURE DE LA LIGHT-BOX
-const displayLightBox = () => {
-  const lightBoxSection = document.querySelector(".light-box-section");
+//// GESTION DE LA LIGHT-BOX
+const lightBoxSection = document.querySelector(".light-box-section");
+
+const initMediasListeners = () => {
   const medias = document.querySelectorAll(".media");
 
   medias.forEach((media) =>
     media.addEventListener("click", () => {
       lightBoxSection.style.display = "grid";
-
-      const titleElement = lightBoxSection.querySelector("figcaption");
-      titleElement.innerHTML = media.alt;
-
-      const imgElement = lightBoxSection.querySelector(".media");
-      imgElement.src = media.src;
-      imgElement.alt = media.alt;
+      loadMediaInLightBox(media);
     })
   );
 };
 
+const loadMediaInLightBox = (media) => {
+  lightBoxSection.dataset.selectedMedia = media.parentElement.id;
+
+  const titleElement = lightBoxSection.querySelector("figcaption");
+  titleElement.innerHTML = media.alt;
+
+  const imgElement = lightBoxSection.querySelector(".media");
+  imgElement.src = media.src;
+  imgElement.alt = media.alt;
+
+  handleLightBoxNavigation();
+  // install events clavier <= / =>
+  // + .removeEventListener (au moment de fermer la lightbox)
+  // install eventlistener sur la croix => echap pour fermer la lightbox
+};
+
 //// GESTION DE LA NAVIGATION LIGHT-BOX
 const handleLightBoxNavigation = () => {
-  const chevronRight = lightBoxSection.querySelector(".fa-chevron-right");
-  const chevronLeft = lightBoxSection.querySelector(".fa-chevron-left");
+  const galerySection = document.getElementById("galery-section");
 
-  chevronRight.addEventListener("click", () => {});
+  const chevronRight = document.querySelector(".fa-chevron-right");
+  const chevronLeft = document.querySelector(".fa-chevron-left");
+
+  // Trouver l'index du media chargé
+  const medias = Array.from(galerySection.querySelectorAll(".media"));
+  const mediaId = lightBoxSection.dataset.selectedMedia;
+  const mediaIndex = medias.findIndex(
+    (media) => media.parentElement.id.toString() === mediaId
+  );
+
+  const previousMedia = medias[mediaIndex - 1];
+  const nextMedia = medias[mediaIndex + 1];
+
+  // Si le media à droite est nul...
+  if (nextMedia == null) {
+    chevronRight.style.color = "transparent";
+  } else {
+    chevronRight.style.color = "#901c1c";
+    chevronRight.onclick = () => loadMediaInLightBox(nextMedia);
+    // ajout event au clavier
+  }
+
+  // Si le media à gauche est nul...
+  if (previousMedia == null) {
+    chevronLeft.style.color = "transparent";
+  } else {
+    chevronLeft.style.color = "#901c1c";
+    chevronLeft.onclick = () => loadMediaInLightBox(previousMedia);
+    // ajout event au clavier
+  }
 };
 
 //// CRÉATION DE LA GALLERIE
@@ -181,7 +220,9 @@ const main = async () => {
   handleSelect(filteredMedias);
 
   installEventLikeButton();
-  displayLightBox();
+
+  // Gestion de la lightbox
+  initMediasListeners();
 
   // Récupération des données de la bannière
   computeTotalLikes();

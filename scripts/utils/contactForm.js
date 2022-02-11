@@ -11,12 +11,12 @@ const displayModal = (photograph) => {
   const inputs = modal.querySelectorAll("input");
   const textarea = modal.querySelector("textarea");
 
-  let inputValues = [];
-
-  inputs.forEach((input) => inputValues.push(input.value));
-  inputValues.push(textarea.value);
-
   form.onsubmit = (event) => {
+    let inputValues = [];
+
+    inputs.forEach((input) => inputValues.push(input.value));
+    inputValues.push(textarea.value);
+
     event.preventDefault();
     console.log(inputValues);
     modal.style.display = "none";
