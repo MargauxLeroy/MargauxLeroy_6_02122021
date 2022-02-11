@@ -66,7 +66,7 @@
   margin: 40px 100px;
 }
 
-.galery-section li:hover {
+.galery-section li img:hover {
   animation-duration: 300ms;
   opacity: 80%;
 }
@@ -209,6 +209,7 @@ form div {
 form input,
 form textarea {
   width: 98%;
+  max-width: 98%;
   height: 48px;
   border: none;
   border-radius: 5px;
@@ -220,7 +221,7 @@ form textarea {
   display: none;
   height: 100%;
   width: 100%;
-  background-color: #ffffffd1;
+  background-color: #fffffff3;
   position: fixed;
   top: 0;
   z-index: 999;
@@ -242,6 +243,10 @@ form textarea {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.light-box-section figcaption {
+  font-size: 24px;
 }
 
 .light-box-section .fa-chevron-left {

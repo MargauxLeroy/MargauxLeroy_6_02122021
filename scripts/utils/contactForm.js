@@ -9,10 +9,12 @@ const displayModal = (photograph) => {
   // Affichage de la valeur des inputs dans la console
   const form = modal.querySelector("form");
   const inputs = modal.querySelectorAll("input");
+  const textarea = modal.querySelector("textarea");
 
   let inputValues = [];
 
   inputs.forEach((input) => inputValues.push(input.value));
+  inputValues.push(textarea.value);
 
   form.onsubmit = (event) => {
     event.preventDefault();

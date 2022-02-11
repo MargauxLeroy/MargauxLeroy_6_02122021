@@ -30,8 +30,35 @@ const photographerContact = (photograph) => {
   });
 };
 
+//// OUVERTURE DE LA LIGHT-BOX
+const displayLightBox = () => {
+  const lightBoxSection = document.querySelector(".light-box-section");
+  const medias = document.querySelectorAll(".media");
+
+  medias.forEach((media) =>
+    media.addEventListener("click", () => {
+      lightBoxSection.style.display = "grid";
+
+      const titleElement = lightBoxSection.querySelector("figcaption");
+      titleElement.innerHTML = media.alt;
+
+      const imgElement = lightBoxSection.querySelector(".media");
+      imgElement.src = media.src;
+      imgElement.alt = media.alt;
+    })
+  );
+};
+
+//// GESTION DE LA NAVIGATION LIGHT-BOX
+const handleLightBoxNavigation = () => {
+  const chevronRight = lightBoxSection.querySelector(".fa-chevron-right");
+  const chevronLeft = lightBoxSection.querySelector(".fa-chevron-left");
+
+  chevronRight.addEventListener("click", () => {});
+};
+
 //// CRÉATION DE LA GALLERIE
-const mediaGalery = (mediaArray) => {
+const createMediaGalery = (mediaArray) => {
   const galerySection = document.getElementById("galery-section");
 
   galerySection.innerHTML = "";
@@ -42,35 +69,15 @@ const mediaGalery = (mediaArray) => {
     galerySection.innerHTML += currentMedia.createHTML;
     return currentMedia;
   });
+};
 
-  // Pour toutes les images...
-  mediaElements.forEach((currentMedia) => {
-    const mediaElement = document.getElementById(`${currentMedia._id}`);
-    console.log(mediaElement);
+//// ÉVÊNEMENT DU BOUTTON COEUR
+const installEventLikeButton = () => {
+  const likeButtons = document.querySelectorAll(".like-button");
 
-    // // OUVERTURE DE LA LIGHT-BOX
-    // const lightBoxSection = document.querySelector(".light-box-section");
-    // // console.log(mediaElement.querySelector(".media"));
-
-    // const media = mediaElement.querySelector("img");
-    // console.log(media);
-
-    // // media.addEventListener("click", () => {
-    // mediaElement.addEventListener("click", () => {
-    //   lightBoxSection.style.display = "grid";
-
-    //   const titleElement = lightBoxSection.querySelector("figcaption");
-    //   titleElement.innerHTML = currentMedia._title;
-
-    //   const imgElement = lightBoxSection.querySelector(".media");
-    //   // imgElement.src = currentMedia._;
-    // });
-
-    // EVENEMENT DU BOUTTON COEUR
-    const likeButton = mediaElement.querySelector(".like-button");
-    const likeNumber = mediaElement.querySelector(".like-number");
-
-    likeButton.addEventListener("click", () => {
+  likeButtons.forEach((likeButton) =>
+    likeButton.addEventListener("click", (e) => {
+      const likeNumber = e.target.parentNode.previousElementSibling;
       let number = parseInt(likeNumber.innerHTML);
       let isButtonActive = likeButton.dataset.active;
 
@@ -84,8 +91,8 @@ const mediaGalery = (mediaArray) => {
 
       likeNumber.innerHTML = number.toString();
       computeTotalLikes();
-    });
-  });
+    })
+  );
 };
 
 //// GESTION DU TRI (Popularité / Date / Tri)
@@ -107,21 +114,21 @@ const handleSelect = (filteredMedias) => {
     switch (selectedChoice) {
       case "trend":
         filteredMedias.sort(byTrend);
-        mediaGalery(filteredMedias);
+        createMediaGalery(filteredMedias);
         break;
       case "date":
         filteredMedias.sort(byDate);
-        mediaGalery(filteredMedias);
+        createMediaGalery(filteredMedias);
         break;
       case "title":
         filteredMedias.sort(byTitle);
-        mediaGalery(filteredMedias);
+        createMediaGalery(filteredMedias);
         break;
       // case "default":
       //   mediaGalery(filteredMedias);
       //   break;
       default:
-        mediaGalery(filteredMedias);
+        createMediaGalery(filteredMedias);
         break;
     }
   });
@@ -170,8 +177,11 @@ const main = async () => {
     (media) => media.photographerId == photographerId
   );
 
-  mediaGalery(filteredMedias);
+  createMediaGalery(filteredMedias);
   handleSelect(filteredMedias);
+
+  installEventLikeButton();
+  displayLightBox();
 
   // Récupération des données de la bannière
   computeTotalLikes();

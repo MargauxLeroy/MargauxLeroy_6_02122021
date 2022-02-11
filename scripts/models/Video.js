@@ -11,8 +11,8 @@ export class Video {
 
   get createHTML() {
     return `
-            <li class="media" id="${this._id}"> 
-                <video controls width="350" height="300">
+            <li id="${this._id}"> 
+                <video class="media" controls width="350" height="300">
                     <source src="assets/images/${this._photographerId}/${this._video}"" type="video/webm" alt="${this._title}">
                 </video>
                 <figcaption class="media-informations">

@@ -11,8 +11,8 @@ export class Image {
 
   get createHTML() {
     return `
-        <li class="media" id="${this._id}"> 
-            <img src="assets/images/${this._photographerId}/${this._image}" alt="${this._title}" height="300", width="350">
+        <li id="${this._id}"> 
+            <img src="assets/images/${this._photographerId}/${this._image}" class="media" alt="${this._title}" height="300", width="350">
             <figcaption class="media-informations">
                 <h2 aria-label="Nom de la photo">${this._title}</h2>
                 <div class="likes">             
