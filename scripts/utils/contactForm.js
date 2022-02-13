@@ -26,7 +26,4 @@ const displayModal = (photograph) => {
 function closeModal() {
   const modal = document.getElementById("contact_modal");
   modal.style.display = "none";
-
-  const lightBox = document.querySelector(".light-box-section");
-  lightBox.style.display = "none";
 }

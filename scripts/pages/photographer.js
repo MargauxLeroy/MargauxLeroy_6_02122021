@@ -46,20 +46,37 @@ const initMediasListeners = () => {
 
 const loadMediaInLightBox = (media) => {
   if (!media) return;
-
   lightBoxSection.dataset.selectedMedia = media.parentElement.id;
 
+  const isImage = media.tagName === "IMG";
   const titleElement = lightBoxSection.querySelector("figcaption");
-  titleElement.innerHTML = media.alt;
+  titleElement.innerHTML = media.getAttribute("alt");
 
-  const imgElement = lightBoxSection.querySelector(".media");
-  imgElement.src = media.src;
-  imgElement.alt = media.alt;
+  const imgElement = lightBoxSection.querySelector("img.media");
+  const videoElement = lightBoxSection.querySelector("video.media");
+
+  if (isImage) {
+    imgElement.src = media.src;
+    imgElement.alt = media.alt;
+
+    videoElement.style.display = "none";
+    imgElement.style.display = "initial";
+  } else {
+    const videoSource = media.querySelector("source");
+    const source = document.createElement("source");
+    const sourceElement = lightBoxSection.querySelector("video.media source");
+    source.src = videoSource.src;
+    source.alt = media.alt;
+
+    sourceElement.replaceWith(source);
+
+    imgElement.style.display = "none";
+    videoElement.style.display = "initial";
+  }
 
   handleLightBoxNavigation();
 
   // + .removeEventListener (au moment de fermer la lightbox)
-  // install eventlistener sur la croix => echap pour fermer la lightbox
 };
 
 const getSiblingsMedia = () => {
@@ -114,10 +131,19 @@ const handleKeyboardNavigation = () => {
       e.preventDefault();
       loadMediaInLightBox(previousMedia);
     }
-
-    if (e.key === "Escape") lightBoxSection.style.display = "none";
+    if (e.key === "Escape") {
+      closeLightBox();
+    }
   });
 };
+
+const closeLightBox = () => {
+  lightBoxSection.style.display = "none";
+};
+
+lightBoxSection
+  .querySelector(".close")
+  .addEventListener("click", closeLightBox);
 
 //// CRÉATION DE LA GALLERIE
 const createMediaGalery = (mediaArray) => {
