@@ -45,6 +45,8 @@ const initMediasListeners = () => {
 };
 
 const loadMediaInLightBox = (media) => {
+  if (!media) return;
+
   lightBoxSection.dataset.selectedMedia = media.parentElement.id;
 
   const titleElement = lightBoxSection.querySelector("figcaption");
@@ -55,19 +57,15 @@ const loadMediaInLightBox = (media) => {
   imgElement.alt = media.alt;
 
   handleLightBoxNavigation();
-  // install events clavier <= / =>
+
   // + .removeEventListener (au moment de fermer la lightbox)
   // install eventlistener sur la croix => echap pour fermer la lightbox
 };
 
-//// GESTION DE LA NAVIGATION LIGHT-BOX
-const handleLightBoxNavigation = () => {
+const getSiblingsMedia = () => {
+  // Trouver l'index du media chargé
   const galerySection = document.getElementById("galery-section");
 
-  const chevronRight = document.querySelector(".fa-chevron-right");
-  const chevronLeft = document.querySelector(".fa-chevron-left");
-
-  // Trouver l'index du media chargé
   const medias = Array.from(galerySection.querySelectorAll(".media"));
   const mediaId = lightBoxSection.dataset.selectedMedia;
   const mediaIndex = medias.findIndex(
@@ -77,13 +75,22 @@ const handleLightBoxNavigation = () => {
   const previousMedia = medias[mediaIndex - 1];
   const nextMedia = medias[mediaIndex + 1];
 
+  return { nextMedia, previousMedia };
+};
+
+//// GESTION DE LA NAVIGATION LIGHT-BOX
+const handleLightBoxNavigation = () => {
+  const chevronRight = document.querySelector(".fa-chevron-right");
+  const chevronLeft = document.querySelector(".fa-chevron-left");
+
+  const { previousMedia, nextMedia } = getSiblingsMedia();
+
   // Si le media à droite est nul...
   if (nextMedia == null) {
     chevronRight.style.color = "transparent";
   } else {
     chevronRight.style.color = "#901c1c";
     chevronRight.onclick = () => loadMediaInLightBox(nextMedia);
-    // ajout event au clavier
   }
 
   // Si le media à gauche est nul...
@@ -92,8 +99,24 @@ const handleLightBoxNavigation = () => {
   } else {
     chevronLeft.style.color = "#901c1c";
     chevronLeft.onclick = () => loadMediaInLightBox(previousMedia);
-    // ajout event au clavier
   }
+};
+
+const handleKeyboardNavigation = () => {
+  document.addEventListener("keydown", (e) => {
+    const { previousMedia, nextMedia } = getSiblingsMedia();
+
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      loadMediaInLightBox(nextMedia);
+    }
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      loadMediaInLightBox(previousMedia);
+    }
+
+    if (e.key === "Escape") lightBoxSection.style.display = "none";
+  });
 };
 
 //// CRÉATION DE LA GALLERIE
@@ -102,11 +125,9 @@ const createMediaGalery = (mediaArray) => {
 
   galerySection.innerHTML = "";
 
-  const mediaElements = mediaArray.map((media) => {
+  mediaArray.forEach((media) => {
     let currentMedia = new MediaFactory(media);
-
     galerySection.innerHTML += currentMedia.createHTML;
-    return currentMedia;
   });
 };
 
@@ -223,6 +244,8 @@ const main = async () => {
 
   // Gestion de la lightbox
   initMediasListeners();
+
+  handleKeyboardNavigation();
 
   // Récupération des données de la bannière
   computeTotalLikes();
