@@ -14,6 +14,7 @@ const displayPhotograph = (name, city, country, tagline, portrait) => {
   const contactButton = document.querySelector(".contact_button");
 
   const photographInformations = document.createElement("div");
+  photographInformations.tabIndex = 2;
   photographInformations.innerHTML += `<h1>${name}</h1><h3>${city}, ${country}</h3><q>${tagline}</q>`;
 
   const photographPortrait = document.querySelector(".photographer-portrait");
@@ -136,6 +137,11 @@ const handleKeyboardNavigation = () => {
     }
   });
 };
+
+// const openLightBox = () => {
+//   lightBoxSection.style.display = "grid";
+//   loadMediaInLightBox(media);
+// };
 
 const closeLightBox = () => {
   lightBoxSection.style.display = "none";

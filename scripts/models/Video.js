@@ -11,15 +11,15 @@ export class Video {
 
   get createHTML() {
     return `
-            <figure id="${this._id}" tabindex="4"> 
+            <figure id="${this._id}"> 
                 <video class="media" controls width="350" height="300" alt="${this._title}">
-                    <source src="assets/images/${this._photographerId}/${this._video}" type="video/webm">
+                    <source src="assets/images/${this._photographerId}/${this._video}" type="video/webm" tabindex="5">
                 </video>
                 <figcaption class="media-informations">
                     <h2 aria-label="Nom de la photo">${this._title}</h2>
                     <div class="likes">             
                         <p class="like-number">${this._likes}</p>
-                        <button class="like-button" data-active='false'><i class="fas fa-heart"></i></button>    
+                        <button class="like-button" data-active="false" tabindex="5"><i class="fas fa-heart"></i></button>    
                     </div>
                 </figcaption>
              </figure>

@@ -21,6 +21,13 @@ const displayModal = (photograph) => {
     console.log(inputValues);
     modal.style.display = "none";
   };
+
+  // Fermeture de la modale (Echap)
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeModal();
+    }
+  });
 };
 
 function closeModal() {

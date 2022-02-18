@@ -35,7 +35,7 @@ class Photographer {
 
   get createHTML() {
     return `
-        <a href="photographer.html?id=${this._id}"> 
+        <a href="photographer.html?id=${this._id}" tabindex="1"> 
           <article>
             <img src="assets/photographers/${this._portrait}" class="photographer-portrait" alt="Photo du photographe">
             <h2 aria-label="Nom du photographe">${this._name}</h2>
