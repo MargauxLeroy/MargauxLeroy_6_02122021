@@ -23,11 +23,11 @@ const displayModal = (photograph) => {
   };
 
   // Fermeture de la modale (Echap)
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      closeModal();
-    }
-  });
+  // document.addEventListener("keydown", (e) => {
+  //   if (e.key === "Escape") {
+  //     closeModal();
+  //   }
+  // });
 };
 
 function closeModal() {
