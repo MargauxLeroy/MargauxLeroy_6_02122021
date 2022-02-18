@@ -31,18 +31,123 @@ const photographerContact = (photograph) => {
   });
 };
 
+//// CRÉATION DE LA GALLERIE
+const createMediaGalery = (mediaArray) => {
+  const galerySection = document.getElementById("galery-section");
+
+  galerySection.innerHTML = "";
+
+  mediaArray.forEach((media) => {
+    let currentMedia = new MediaFactory(media);
+    galerySection.innerHTML += currentMedia.createHTML;
+  });
+
+  installEventLikeButton();
+  initMediasListeners();
+};
+
+//// ÉVÊNEMENT DU BOUTTON COEUR
+const installEventLikeButton = () => {
+  const likesContainers = document.querySelectorAll(".likes");
+
+  likesContainers.forEach((likesContainer) =>
+    likesContainer.addEventListener("click", () => {
+      const likeNumber = likesContainer.querySelector(".like-number");
+      const likeButton = likesContainer.querySelector(".like-button");
+
+      let number = parseInt(likeNumber.innerHTML);
+      let isButtonActive = likeButton.dataset.active;
+
+      if (isButtonActive == "true") {
+        likeButton.dataset.active = "false";
+        number--;
+      } else {
+        likeButton.dataset.active = "true";
+        number++;
+      }
+
+      likeNumber.innerHTML = number.toString();
+      computeTotalLikes();
+    })
+  );
+};
+
+//// GESTION DU TRI (Popularité / Date / Tri)
+/**
+ *
+ * @param {*} filteredMedias
+ */
+const handleSelect = (filteredMedias) => {
+  const mediaSelect = document.getElementById("media-select");
+
+  mediaSelect.addEventListener("change", function () {
+    let selectedChoice = mediaSelect.value;
+
+    const byDate = (a, b) =>
+      new Date(b.date).getTime() - new Date(a.date).getTime();
+    const byTrend = (a, b) => b.likes - a.likes;
+    const byTitle = (a, b) => {
+      if (a.title < b.title) return -1;
+      if (a.title > b.title) return 1;
+      return 0;
+    };
+
+    switch (selectedChoice) {
+      case "trend":
+        filteredMedias.sort(byTrend);
+        createMediaGalery(filteredMedias);
+        break;
+      case "date":
+        filteredMedias.sort(byDate);
+        createMediaGalery(filteredMedias);
+        break;
+      case "title":
+        filteredMedias.sort(byTitle);
+        createMediaGalery(filteredMedias);
+        break;
+      // case "default":
+      //   mediaGalery(filteredMedias);
+      //   break;
+      default:
+        createMediaGalery(filteredMedias);
+        break;
+    }
+  });
+};
+
+//// GESTION DE LA BANNIÈRE
+const computeTotalLikes = () => {
+  const likeNumbers = document.querySelectorAll(".like-number");
+  let total = 0;
+
+  likeNumbers.forEach((number) => (total += parseInt(number.innerHTML)));
+
+  const totalLikes = document.querySelector(".total-likes");
+  totalLikes.innerHTML = total;
+};
+
+const setDailyPrice = (price) => {
+  const dailyPrice = document.querySelector(".daily-price");
+  dailyPrice.innerHTML = price + "€/jour";
+};
+
 //// GESTION DE LA LIGHT-BOX
 const lightBoxSection = document.querySelector(".light-box-section");
 
 const initMediasListeners = () => {
   const medias = document.querySelectorAll(".media");
 
-  medias.forEach((media) =>
+  medias.forEach((media) => {
     media.addEventListener("click", () => {
-      lightBoxSection.style.display = "grid";
-      loadMediaInLightBox(media);
-    })
-  );
+      openLightBox(media);
+    });
+    media.addEventListener("keydown", (e) => {
+      console.log(e.key);
+      if (e.key === "Enter") {
+        openLightBox(media);
+      }
+    });
+  });
 };
 
 const loadMediaInLightBox = (media) => {
@@ -76,8 +181,6 @@ const loadMediaInLightBox = (media) => {
   }
 
   handleLightBoxNavigation();
-
-  // + .removeEventListener (au moment de fermer la lightbox)
 };
 
 const getSiblingsMedia = () => {
@@ -138,10 +241,10 @@ const handleKeyboardNavigation = () => {
   });
 };
 
-// const openLightBox = () => {
-//   lightBoxSection.style.display = "grid";
-//   loadMediaInLightBox(media);
-// };
+const openLightBox = (media) => {
+  lightBoxSection.style.display = "grid";
+  loadMediaInLightBox(media);
+};
 
 const closeLightBox = () => {
   lightBoxSection.style.display = "none";
@@ -150,99 +253,6 @@ const closeLightBox = () => {
 lightBoxSection
   .querySelector(".close")
   .addEventListener("click", closeLightBox);
-
-//// CRÉATION DE LA GALLERIE
-const createMediaGalery = (mediaArray) => {
-  const galerySection = document.getElementById("galery-section");
-
-  galerySection.innerHTML = "";
-
-  mediaArray.forEach((media) => {
-    let currentMedia = new MediaFactory(media);
-    galerySection.innerHTML += currentMedia.createHTML;
-  });
-};
-
-//// ÉVÊNEMENT DU BOUTTON COEUR
-const installEventLikeButton = () => {
-  const likesContainers = document.querySelectorAll(".likes");
-
-  likesContainers.forEach((likesContainer) =>
-    likesContainer.addEventListener("click", () => {
-      const likeNumber = likesContainer.querySelector(".like-number");
-      const likeButton = likesContainer.querySelector(".like-button");
-
-      let number = parseInt(likeNumber.innerHTML);
-      let isButtonActive = likeButton.dataset.active;
-
-      if (isButtonActive == "true") {
-        likeButton.dataset.active = "false";
-        number--;
-      } else {
-        likeButton.dataset.active = "true";
-        number++;
-      }
-
-      likeNumber.innerHTML = number.toString();
-      computeTotalLikes();
-    })
-  );
-};
-
-//// GESTION DU TRI (Popularité / Date / Tri)
-const handleSelect = (filteredMedias) => {
-  const mediaSelect = document.getElementById("media-select");
-
-  mediaSelect.addEventListener("change", function () {
-    let selectedChoice = mediaSelect.value;
-
-    const byDate = (a, b) =>
-      new Date(b.date).getTime() - new Date(a.date).getTime();
-    const byTrend = (a, b) => b.likes - a.likes;
-    const byTitle = (a, b) => {
-      if (a.title < b.title) return -1;
-      if (a.title > b.title) return 1;
-      return 0;
-    };
-
-    switch (selectedChoice) {
-      case "trend":
-        filteredMedias.sort(byTrend);
-        createMediaGalery(filteredMedias);
-        break;
-      case "date":
-        filteredMedias.sort(byDate);
-        createMediaGalery(filteredMedias);
-        break;
-      case "title":
-        filteredMedias.sort(byTitle);
-        createMediaGalery(filteredMedias);
-        break;
-      // case "default":
-      //   mediaGalery(filteredMedias);
-      //   break;
-      default:
-        createMediaGalery(filteredMedias);
-        break;
-    }
-  });
-};
-
-//// GESTION DE LA BANNIÈRE
-const computeTotalLikes = () => {
-  const likeNumbers = document.querySelectorAll(".like-number");
-  let total = 0;
-
-  likeNumbers.forEach((number) => (total += parseInt(number.innerHTML)));
-
-  const totalLikes = document.querySelector(".total-likes");
-  totalLikes.innerHTML = total;
-};
-
-const setDailyPrice = (price) => {
-  const dailyPrice = document.querySelector(".daily-price");
-  dailyPrice.innerHTML = price + "€/jour";
-};
 
 //// INITIALISATION
 const main = async () => {
@@ -274,11 +284,7 @@ const main = async () => {
   createMediaGalery(filteredMedias);
   handleSelect(filteredMedias);
 
-  installEventLikeButton();
-
   // Gestion de la lightbox
-  initMediasListeners();
-
   handleKeyboardNavigation();
 
   // Récupération des données de la bannière

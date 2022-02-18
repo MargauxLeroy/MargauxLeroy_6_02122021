@@ -12,8 +12,8 @@ export class Video {
   get createHTML() {
     return `
             <figure id="${this._id}"> 
-                <video class="media" controls width="350" height="300" alt="${this._title}">
-                    <source src="assets/images/${this._photographerId}/${this._video}" type="video/webm" tabindex="5">
+                <video class="media" controls alt="${this._title}" tabindex="5">
+                    <source src="assets/images/${this._photographerId}/${this._video}" type="video/webm" >
                 </video>
                 <figcaption class="media-informations">
                     <h2 aria-label="Nom de la photo">${this._title}</h2>
