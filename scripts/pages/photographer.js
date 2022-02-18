@@ -1,5 +1,5 @@
 import { getData } from "../utils/getData.js";
-import { displayModal } from "../utils/contactForm";
+// import { displayModal } from "../utils/contactForm.js";
 import { MediaFactory } from "../factories/mediaFactory.js";
 
 //// RÉCUPÉRATION DE L'ID DU PHOTOGRAPHE

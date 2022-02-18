@@ -1,4 +1,4 @@
-export const displayModal = (photograph) => {
+const displayModal = (photograph) => {
   const modal = document.getElementById("contact_modal");
   modal.style.display = "block";
 
