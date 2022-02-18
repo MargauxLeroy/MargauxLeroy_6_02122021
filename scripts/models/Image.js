@@ -15,7 +15,6 @@ export class Image {
           <img src="assets/images/${this._photographerId}/${this._image}" 
                class="media" 
                alt="${this._title}" 
-               
                tabindex="5"
           >
           <figcaption class="media-informations">
