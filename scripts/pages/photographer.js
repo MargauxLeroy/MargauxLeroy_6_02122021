@@ -164,7 +164,7 @@ const loadMediaInLightBox = (media) => {
 
   if (isImage) {
     imgElement.src = media.src;
-    imgElement.alt = media.alt;
+    imgElement.alt += " " + media.alt;
 
     videoElement.style.display = "none";
     imgElement.style.display = "initial";
@@ -173,7 +173,7 @@ const loadMediaInLightBox = (media) => {
     const source = document.createElement("source");
     const sourceElement = lightBoxSection.querySelector("video.media source");
     source.src = videoSource.src;
-    source.alt = media.alt;
+    source.alt += " " + media.alt;
 
     sourceElement.replaceWith(source);
 
