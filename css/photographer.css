@@ -231,7 +231,7 @@ form textarea {
   display: none;
   height: 100%;
   width: 100%;
-  background-color: #fffffff3;
+  background-color: #ffffff;
   position: fixed;
   top: 0;
   z-index: 999;
@@ -246,9 +246,7 @@ form textarea {
 
 .light-box-section i {
   padding: 24px;
-  font-size: 64px;
-  height: 72px;
-  width: 72px;
+  font-size: 42px;
   color: #901c1c;
   display: flex;
   align-items: center;
@@ -270,25 +268,25 @@ form textarea {
 }
 
 .light-box-section .fa-times {
-  /* grid-column: 3;
-  grid-row: 2; */
   position: absolute;
   top: 2%;
   right: 1%;
 }
 
 .light-box-section .media {
-  /* height: 900px;
-  width: 1050px; */
   height: 100%;
   width: 100%;
-  background-color: lavender;
+  background-color: whitesmoke;
   grid-column: 2;
   grid-row: 2 / 4;
 }
 
+.light-box-section img {
+  object-fit: contain;
+}
+
 .light-box-section figcaption {
-  padding: 12px;
+  padding: 12px 0;
   grid-column: 2;
   grid-row: 4;
 }

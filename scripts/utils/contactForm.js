@@ -1,5 +1,6 @@
+const modal = document.getElementById("contact_modal");
+
 const displayModal = (photograph) => {
-  const modal = document.getElementById("contact_modal");
   modal.style.display = "block";
 
   // Adaptation du nom en fonction du photographe
@@ -17,9 +18,15 @@ const displayModal = (photograph) => {
     inputs.forEach((input) => inputValues.push(input.value));
     inputValues.push(textarea.value);
 
-    event.preventDefault();
-    console.log(inputValues);
-    modal.style.display = "none";
+    // Si les valeurs des champs ne sont pas nulles...
+    if (inputValues.every((inputValue) => inputValue != "")) {
+      event.preventDefault();
+      console.log(inputValues);
+      closeModal();
+      // Sinon... empêcher la modale de se fermer
+    } else {
+      event.preventDefault();
+    }
   };
 
   // Fermeture de la modale (Echap)
@@ -31,6 +38,5 @@ const displayModal = (photograph) => {
 };
 
 function closeModal() {
-  const modal = document.getElementById("contact_modal");
   modal.style.display = "none";
 }
