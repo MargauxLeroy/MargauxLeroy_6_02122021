@@ -22,12 +22,15 @@
     <main id="main">
       <section class="photograph-header">
         <button class="contact_button" tabindex="3">Contactez-moi</button>
-        <img class="photographer-portrait" />
+        <img
+          class="photographer-portrait"
+          alt="Photo-portrait du photographe"
+        />
       </section>
 
       <div class="galery-filters">
+        <label for="media-select">Trier par</label>
         <select name="filters" id="media-select" tabindex="4">
-          <option value="default">--Trier par--</option>
           <option value="trend">Popularité</option>
           <option value="date">Date</option>
           <option value="title">Titre</option>
@@ -53,7 +56,11 @@
       <div class="modal">
         <header>
           <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <img
+            src="assets/icons/close.svg"
+            onclick="closeModal()"
+            alt="Icône croix de fermeture de la modale"
+          />
         </header>
         <form action="" method="get">
           <div class="form-data">
@@ -97,7 +104,7 @@
       <i class="fas fa-times close" onclick="closeModal()"></i>
 
       <i class="fas fa-chevron-left"></i>
-      <img class="media" src="" />
+      <img class="media" src="" alt="" />
       <video class="media" controls width="350" height="300">
         <source type="video/webm" src="" />
       </video>

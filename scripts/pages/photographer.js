@@ -20,7 +20,7 @@ const displayPhotograph = (name, city, country, tagline, portrait) => {
 
   const photographPortrait = document.querySelector(".photographer-portrait");
   photographPortrait.src = "assets/photographers/" + portrait;
-  photographPortrait.setAttribute("alt", `Photo de ${name}`);
+  photographPortrait.alt += " " + name;
 
   photographHeader.insertBefore(photographInformations, contactButton);
   photographHeader.appendChild(photographPortrait);
