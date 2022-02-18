@@ -165,12 +165,13 @@ const createMediaGalery = (mediaArray) => {
 
 //// ÉVÊNEMENT DU BOUTTON COEUR
 const installEventLikeButton = () => {
-  // const likeButtons = document.querySelectorAll(".like-button");
   const likesContainers = document.querySelectorAll(".likes");
 
   likesContainers.forEach((likesContainer) =>
     likesContainer.addEventListener("click", () => {
-      const likeNumber = document.querySelectorAll(".like-number");
+      const likeNumber = likesContainer.querySelector(".like-number");
+      const likeButton = likesContainer.querySelector(".like-button");
+
       let number = parseInt(likeNumber.innerHTML);
       let isButtonActive = likeButton.dataset.active;
 
@@ -186,26 +187,6 @@ const installEventLikeButton = () => {
       computeTotalLikes();
     })
   );
-
-  // likeButtons.forEach((likeButton) =>
-  //   likeButton.addEventListener("click", (e) => {
-  //     console.log(e.target);
-  //     const likeNumber = e.target.parentNode.previousElementSibling;
-  //     let number = parseInt(likeNumber.innerHTML);
-  //     let isButtonActive = likeButton.dataset.active;
-
-  //     if (isButtonActive == "true") {
-  //       likeButton.dataset.active = "false";
-  //       number--;
-  //     } else {
-  //       likeButton.dataset.active = "true";
-  //       number++;
-  //     }
-
-  //     likeNumber.innerHTML = number.toString();
-  //     computeTotalLikes();
-  //   })
-  // );
 };
 
 //// GESTION DU TRI (Popularité / Date / Tri)
