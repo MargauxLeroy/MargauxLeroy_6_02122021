@@ -76,6 +76,10 @@
   aspect-ratio: 1 / 1;
 }
 
+.galery-section img:hover {
+  cursor: pointer;
+}
+
 .galery-section li img:hover {
   animation-duration: 300ms;
   opacity: 80%;
@@ -276,7 +280,7 @@ form textarea {
 .light-box-section .media {
   height: 100%;
   width: 100%;
-  background-color: whitesmoke;
+  /* background-color: whitesmoke; */
   grid-column: 2;
   grid-row: 2 / 4;
 }

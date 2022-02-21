@@ -66,6 +66,14 @@ li {
   list-style: none;
 }
 
+i:hover {
+  cursor: pointer;
+}
+
+select:hover {
+  cursor: pointer;
+}
+
 .logo {
   height: 50px;
   margin-left: 100px;
