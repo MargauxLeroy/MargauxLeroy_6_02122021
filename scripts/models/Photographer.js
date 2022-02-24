@@ -13,11 +13,15 @@ class Photographer {
     return `
         <a href="photographer.html?id=${this._id}" tabindex="1"> 
           <article>
-            <img src="assets/photographers/${this._portrait}" class="photographer-portrait" alt="Photo du photographe">
+            <img 
+              src="assets/photographers/${this._portrait}" 
+              class="photographer-portrait" 
+              alt="Photo du photographe"
+            >
             <h2 aria-label="Nom du photographe">${this._name}</h2>
             <h3 aria-label="Localisation">${this._city}, ${this._country}</h3> 
             <q>${this._tagline}</q>
-            <span>${this._price}€/jour</span>
+            <span aria-label="Prix journalier">${this._price}€/jour</span>
           </article>
         </a>
       `;

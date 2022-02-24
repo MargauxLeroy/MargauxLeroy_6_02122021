@@ -197,6 +197,7 @@
 
 .modal img {
   fill: white;
+  cursor: pointer;
 }
 
 form {

@@ -1,5 +1,4 @@
 import { getData } from "../utils/getData.js";
-// import { displayModal } from "../utils/contactForm.js";
 import { MediaFactory } from "../factories/mediaFactory.js";
 
 //// RÉCUPÉRATION DE L'ID DU PHOTOGRAPHE
@@ -170,15 +169,20 @@ const loadMediaInLightBox = (media) => {
     imgElement.style.display = "initial";
   } else {
     const videoSource = media.querySelector("source");
-    const source = document.createElement("source");
-    const sourceElement = lightBoxSection.querySelector("video.media source");
-    source.src = videoSource.src;
-    source.alt += " " + media.alt;
+    const videoElement = lightBoxSection.querySelector("video.media");
 
-    sourceElement.replaceWith(source);
+    // Clone l'ensemble de l'element video pour forcer les navigateur a recharger la video
+    const clonedVideo = videoElement.cloneNode(true);
+    const clonedSource = clonedVideo.querySelector("source");
+
+    clonedSource.src = videoSource.src;
+    clonedSource.alt += " " + media.alt;
+
+    // Remplace l'ancien element video par son clone modifié (remplace aussi les enfants)
+    videoElement.replaceWith(clonedVideo);
 
     imgElement.style.display = "none";
-    videoElement.style.display = "initial";
+    clonedVideo.style.display = "initial";
   }
 
   handleLightBoxNavigation();
