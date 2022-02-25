@@ -21,7 +21,9 @@ export class Image {
             <h2 aria-label="Nom de la photo : ${this._title}">${this._title}</h2>
             <div class="likes">             
               <p class="like-number" aria-label="Nombre de likes ${this._likes}">${this._likes}</p>
-              <button class="like-button" data-active="false" tabindex="5" aria-label="Icône de coeur"><i class="fas fa-heart"></i></button>    
+              <button class="like-button" data-active="false" tabindex="5" aria-label="Icône de coeur">
+                <i class="fas fa-heart"></i>
+              </button>    
             </div>
           </figcaption>
         </figure>

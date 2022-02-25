@@ -90,12 +90,10 @@ select:hover {
 .photographer_section {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  /* gap: 60px; */
   margin-top: 60px;
 }
 
 .photographer_section article {
-  /* justify-self: center; */
   display: flex;
   justify-content: center;
   align-items: center;

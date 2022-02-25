@@ -1,5 +1,6 @@
 const modal = document.getElementById("contact_modal");
 
+// OUVERTURE DE LA MODALE DE CONTACT
 const displayModal = (photograph) => {
   modal.style.display = "block";
 
@@ -37,6 +38,7 @@ const displayModal = (photograph) => {
   });
 };
 
+// FERMETURE DE MODALE
 function closeModal() {
   modal.style.display = "none";
 }

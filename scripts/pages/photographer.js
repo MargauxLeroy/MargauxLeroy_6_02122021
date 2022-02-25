@@ -3,31 +3,42 @@ import { MediaFactory } from "../factories/mediaFactory.js";
 
 //// RÉCUPÉRATION DE L'ID DU PHOTOGRAPHE
 const getPhotographerId = async () => {
+  // Création / Extraction de l'URL
   const url = new URL(location.toString());
+  // Récupération de la valeur du paramètre ID
   const id = url.searchParams.get("id");
   return id;
 };
 
 //// GESTION DE L'AFFICHAGE DU PHOTOGRAPHE (HEADER)
-const displayPhotograph = (name, city, country, tagline, portrait) => {
-  const photographHeader = document.querySelector(".photograph-header");
-  const contactButton = document.querySelector(".contact_button");
+// Déclaration des constantes
+const photographHeader = document.querySelector(".photograph-header");
+const contactButton = document.querySelector(".contact_button");
+const photographPortrait = document.querySelector(".photographer-portrait");
 
+const displayPhotograph = (photograph) => {
+  // Création et injection des infos du photographe
   const photographInformations = document.createElement("div");
+  photographInformations.innerHTML += `<h1>${photograph.name}</h1><h3>${photograph.city}, ${photograph.country}</h3><q>${photograph.tagline}</q>`;
   photographInformations.tabIndex = 2;
-  photographInformations.innerHTML += `<h1>${name}</h1><h3>${city}, ${country}</h3><q>${tagline}</q>`;
 
-  const photographPortrait = document.querySelector(".photographer-portrait");
-  photographPortrait.src = "assets/photographers/" + portrait;
-  photographPortrait.alt += " " + name;
+  // Injection du path de la photo du photographe
+  photographPortrait.src = "assets/photographers/" + photograph.portrait;
+  photographPortrait.alt += " " + photograph.name;
 
+  // Insertion dans le HTML
   photographHeader.insertBefore(photographInformations, contactButton);
   photographHeader.appendChild(photographPortrait);
 };
 
+//// AJOUT DE L'ACTION AU CLIC DU BOUTON CONTACT (OUVERTURE DU FORM)
+/**
+ * @param {Photographer} photograph
+ */
 const photographerContact = (photograph) => {
-  const contactButton = document.querySelector(".contact_button");
+  // Au clic du bouton...
   contactButton.addEventListener("click", () => {
+    // On affiche la modale formulaire
     displayModal(photograph);
   });
 };
@@ -35,11 +46,13 @@ const photographerContact = (photograph) => {
 //// CRÉATION DE LA GALLERIE
 const createMediaGalery = (mediaArray) => {
   const galerySection = document.getElementById("galery-section");
-
   galerySection.innerHTML = "";
 
+  // Pour chaque média...
   mediaArray.forEach((media) => {
+    // On crée un nouvel objet à l'aide de la MediaFactory
     let currentMedia = new MediaFactory(media);
+    // On l'injecte dans le HTML
     galerySection.innerHTML += currentMedia.createHTML;
   });
 
@@ -51,12 +64,15 @@ const createMediaGalery = (mediaArray) => {
 const installEventLikeButton = () => {
   const likesContainers = document.querySelectorAll(".likes");
 
+  // Pour chaque élément HTML de likes...
   likesContainers.forEach((likesContainer) =>
     likesContainer.addEventListener("click", () => {
       const likeNumber = likesContainer.querySelector(".like-number");
       const likeButton = likesContainer.querySelector(".like-button");
 
+      // On transforme le texte HTML en nombre
       let number = parseInt(likeNumber.innerHTML);
+      // Récupération de l'attribut dataset-active
       let isButtonActive = likeButton.dataset.active;
 
       if (isButtonActive == "true") {
@@ -74,10 +90,6 @@ const installEventLikeButton = () => {
 };
 
 //// GESTION DU TRI (Popularité / Date / Tri)
-/**
- *
- * @param {*} filteredMedias
- */
 const handleSelect = (filteredMedias) => {
   const mediaSelect = document.getElementById("media-select");
 
@@ -132,6 +144,7 @@ const setDailyPrice = (price) => {
 //// GESTION DE LA LIGHT-BOX
 const lightBoxSection = document.querySelector(".light-box-section");
 
+// Initialisation des events au clic des medias
 const initMediasListeners = () => {
   const medias = document.querySelectorAll(".media");
 
@@ -147,35 +160,41 @@ const initMediasListeners = () => {
   });
 };
 
+// Charger le média dans la lightbox
 const loadMediaInLightBox = (media) => {
   if (!media) return;
+
+  // On donne un attribut à la lightbox qui correspond à l'id de l'image cliquée
   lightBoxSection.dataset.selectedMedia = media.parentElement.id;
 
   const isImage = media.tagName === "IMG";
   const titleElement = lightBoxSection.querySelector("figcaption");
   titleElement.innerHTML = media.getAttribute("alt");
 
+  // Récupération des noeuds HTML (image et vidéo)
   const imgElement = lightBoxSection.querySelector("img.media");
   const videoElement = lightBoxSection.querySelector("video.media");
 
+  // Si le noeud est une image...
   if (isImage) {
     imgElement.src = media.src;
     imgElement.alt += " " + media.alt;
 
+    // On affiche uniquement la balise Image
     videoElement.style.display = "none";
     imgElement.style.display = "initial";
   } else {
     const videoSource = media.querySelector("source");
     const videoElement = lightBoxSection.querySelector("video.media");
 
-    // Clone l'ensemble de l'element video pour forcer les navigateur a recharger la video
+    // Clone l'ensemble de l'élément video pour forcer les navigateur à recharger la vidéo
     const clonedVideo = videoElement.cloneNode(true);
     const clonedSource = clonedVideo.querySelector("source");
 
     clonedSource.src = videoSource.src;
     clonedSource.alt += " " + media.alt;
 
-    // Remplace l'ancien element video par son clone modifié (remplace aussi les enfants)
+    // Remplace l'ancien élément vidéo par son clone modifié (remplace aussi les enfants)
     videoElement.replaceWith(clonedVideo);
 
     imgElement.style.display = "none";
@@ -185,20 +204,25 @@ const loadMediaInLightBox = (media) => {
   handleLightBoxNavigation();
 };
 
+// Trouver les images précédentes et suivantes
 const getSiblingsMedia = () => {
-  // Trouver l'index du media chargé
   const galerySection = document.getElementById("galery-section");
 
+  // On récupère tous les medias de la page
   const medias = Array.from(galerySection.querySelectorAll(".media"));
+  // On récupère l'id de l'image chargée
   const mediaId = lightBoxSection.dataset.selectedMedia;
+
+  // On compare l'id de l'image chargé à tous ceux de la galerie
   const mediaIndex = medias.findIndex(
     (media) => media.parentElement.id.toString() === mediaId
   );
 
+  // Une fois situé, on peut retrouver le précédent et le suivant
   const previousMedia = medias[mediaIndex - 1];
   const nextMedia = medias[mediaIndex + 1];
 
-  return { nextMedia, previousMedia };
+  return { previousMedia, nextMedia };
 };
 
 //// GESTION DE LA NAVIGATION LIGHT-BOX
@@ -225,6 +249,7 @@ const handleLightBoxNavigation = () => {
   }
 };
 
+//// GESTION DE LA NAVIGATION AU CLAVIER
 const handleKeyboardNavigation = () => {
   document.addEventListener("keydown", (e) => {
     const { previousMedia, nextMedia } = getSiblingsMedia();
@@ -243,6 +268,7 @@ const handleKeyboardNavigation = () => {
   });
 };
 
+//// OUVERTURE ET FERMETURE DE LA LIGHTBOX
 const openLightBox = (media) => {
   lightBoxSection.style.display = "grid";
   loadMediaInLightBox(media);
@@ -259,22 +285,17 @@ lightBoxSection
 //// INITIALISATION
 const main = async () => {
   const data = await getData();
-  const photographerId = await getPhotographerId();
 
-  // Gestion du.des photographe.s
+  // Récupération des photographes
   const photographers = data.photographers;
+
+  // Comparaison des id (dans l'URL et dans la classe)
+  const photographerId = await getPhotographerId();
   const photograph = photographers.find(
     (photograph) => photograph.id.toString() == photographerId
   );
 
-  displayPhotograph(
-    photograph.name,
-    photograph.city,
-    photograph.country,
-    photograph.tagline,
-    photograph.portrait
-  );
-
+  displayPhotograph(photograph);
   photographerContact(photograph);
 
   // Gestion de la galerie
