@@ -106,9 +106,6 @@ const handleSelect = (filteredMedias) => {
         filteredMedias.sort(byTitle);
         createMediaGalery(filteredMedias);
         break;
-      // case "default":
-      //   mediaGalery(filteredMedias);
-      //   break;
       default:
         createMediaGalery(filteredMedias);
         break;
@@ -206,8 +203,8 @@ const getSiblingsMedia = () => {
 
 //// GESTION DE LA NAVIGATION LIGHT-BOX
 const handleLightBoxNavigation = () => {
-  const chevronRight = document.querySelector(".fa-chevron-right");
-  const chevronLeft = document.querySelector(".fa-chevron-left");
+  const chevronRight = document.querySelector(".chevron-right");
+  const chevronLeft = document.querySelector(".chevron-left");
 
   const { previousMedia, nextMedia } = getSiblingsMedia();
 

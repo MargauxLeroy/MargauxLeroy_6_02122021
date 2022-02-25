@@ -265,17 +265,20 @@ form textarea {
 .light-box-section .fa-chevron-left {
   grid-column: 1;
   grid-row: 3;
+  cursor: pointer;
 }
 
 .light-box-section .fa-chevron-right {
   grid-column: 3;
   grid-row: 3;
+  cursor: pointer;
 }
 
-.light-box-section .fa-times {
+.light-box-section .close {
   position: absolute;
   top: 2%;
   right: 1%;
+  cursor: pointer;
 }
 
 .light-box-section .media {
@@ -286,7 +289,7 @@ form textarea {
   grid-row: 2 / 4;
 }
 
-.light-box-section img {
+.light-box-section .media {
   object-fit: contain;
 }
 
