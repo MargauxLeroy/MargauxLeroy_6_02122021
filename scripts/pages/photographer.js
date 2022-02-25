@@ -203,8 +203,8 @@ const getSiblingsMedia = () => {
 
 //// GESTION DE LA NAVIGATION LIGHT-BOX
 const handleLightBoxNavigation = () => {
-  const chevronRight = document.querySelector(".chevron-right");
-  const chevronLeft = document.querySelector(".chevron-left");
+  const chevronRight = document.querySelector(".fa-chevron-right");
+  const chevronLeft = document.querySelector(".fa-chevron-left");
 
   const { previousMedia, nextMedia } = getSiblingsMedia();
 
