@@ -58,11 +58,9 @@
       <div class="modal">
         <header>
           <h2>Contactez-moi</h2>
-          <img
-            src="assets/icons/close.svg"
-            onclick="closeModal()"
-            alt="Icône croix de fermeture de la modale"
-          />
+          <button onclick="closeModal()" tabindex="3"> 
+            <img src="assets/icons/close.svg" alt="Icône croix de fermeture de la modale"/>
+          </button>
         </header>
         <form method="get">
           <div class="form-data">
@@ -72,7 +70,9 @@
               type="text"
               id="first-name"
               name="first-name"
+              tabindex="3"
             />
+            <span class="error-message">Votre prénom doit contenir plus d'un caractère</span>
           </div>
           <div class="form-data">
             <label for="last-name">Nom</label>
@@ -81,11 +81,15 @@
               type="text"
               id="last-name"
               name="last-name"
+              tabindex="3"
             />
+            <span class="error-message">Votre nom doit contenir plus d'un caractère</span>
+
           </div>
           <div class="form-data">
             <label for="email">Email</label>
-            <input class="text-control" type="email" id="email" name="email" />
+            <input class="text-control" type="email" id="email" name="email" tabindex="3"/>
+            <span class="error-message">Votre email doit être valide</span>
           </div>
           <div class="form-data">
             <label for="your-message">Votre message</label>
@@ -93,27 +97,45 @@
               class="text-control"
               id="your-message"
               name="your-message"
-              cols="40"
               rows="5"
+              cols="40"
+              tabindex="3"
             ></textarea>
+            <span class="error-message">Vous devez détailler votre demande</span>
+
           </div>
-          <button type="submit" class="contact_button">Envoyer</button>
+          <button type="submit" class="contact_button" tabindex="3">Envoyer</button>
         </form>
       </div>
     </div>
 
     <div class="light-box-section">
+
+     <button class="close">
       <i
-        class="fas fa-times close"
+        class="fas fa-times"
         alt="Icône de croix"
         onclick="closeModal()"
-      ></i>
-      <i class="fas fa-chevron-left" alt="Icône d'un chevron à droite"></i>
+        role="icône"></i>
+     </button> 
+        
+     <button class="chevron-left"> 
+       <i 
+        class="fas fa-chevron-left" 
+        role="icône de navigation à gauche"></i>
+      </button>
+
       <img class="media" src="#" alt="Photo :" />
       <video class="media" controls width="350" height="300">
         <source type="video/webm" src="#" />
       </video>
-      <i class="fas fa-chevron-right" alt="Icône d'un chevron à droite"></i>
+
+      <button class="chevron-right">
+        <i 
+        class="fas fa-chevron-right" 
+        alt="Icône d'un chevron à droite"
+        role="icône de navigation à droite"></i>
+      </button>
 
       <figcaption></figcaption>
     </div>

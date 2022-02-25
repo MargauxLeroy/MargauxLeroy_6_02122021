@@ -174,6 +174,7 @@ const loadMediaInLightBox = (media) => {
   // Récupération des noeuds HTML (image et vidéo)
   const imgElement = lightBoxSection.querySelector("img.media");
   const videoElement = lightBoxSection.querySelector("video.media");
+  const videoSource = media.querySelector("source");
 
   // Si le noeud est une image...
   if (isImage) {
@@ -184,9 +185,6 @@ const loadMediaInLightBox = (media) => {
     videoElement.style.display = "none";
     imgElement.style.display = "initial";
   } else {
-    const videoSource = media.querySelector("source");
-    const videoElement = lightBoxSection.querySelector("video.media");
-
     // Clone l'ensemble de l'élément video pour forcer les navigateur à recharger la vidéo
     const clonedVideo = videoElement.cloneNode(true);
     const clonedSource = clonedVideo.querySelector("source");
@@ -197,6 +195,7 @@ const loadMediaInLightBox = (media) => {
     // Remplace l'ancien élément vidéo par son clone modifié (remplace aussi les enfants)
     videoElement.replaceWith(clonedVideo);
 
+    // On affiche uniquement la balise Video
     imgElement.style.display = "none";
     clonedVideo.style.display = "initial";
   }

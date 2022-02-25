@@ -1,5 +1,23 @@
 const modal = document.getElementById("contact_modal");
 
+// Création et affichage des messages d'erreurs
+function displayErrorFeedback() {
+  const errorMessages = modal.querySelectorAll(".error-message");
+
+  errorMessages.forEach((errorMessage) => {
+    console.log("test");
+    errorMessage.style.display = "initial";
+  });
+}
+
+// VERIFICATION DES VALEURS DE CHAMPS
+const isFormValid = () => {
+  const firstName = data.get("firstName");
+  const lastName = data.get("lastName");
+  const email = data.get("email");
+  const message = data.get("message");
+};
+
 // OUVERTURE DE LA MODALE DE CONTACT
 const displayModal = (photograph) => {
   modal.style.display = "block";
@@ -13,9 +31,10 @@ const displayModal = (photograph) => {
   const inputs = modal.querySelectorAll("input");
   const textarea = modal.querySelector("textarea");
 
+  // Une fois le formulaire soumis...
   form.onsubmit = (event) => {
+    // Pour chaque input... on ajoute la valeur dans la liste initialisée
     let inputValues = [];
-
     inputs.forEach((input) => inputValues.push(input.value));
     inputValues.push(textarea.value);
 
@@ -26,6 +45,7 @@ const displayModal = (photograph) => {
       closeModal();
       // Sinon... empêcher la modale de se fermer
     } else {
+      displayErrorFeedback();
       event.preventDefault();
     }
   };

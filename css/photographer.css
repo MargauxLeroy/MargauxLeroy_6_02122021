@@ -74,6 +74,7 @@
 .galery-section video {
   width: 100%;
   aspect-ratio: 1 / 1;
+  object-fit: cover;
 }
 
 .galery-section img:hover {
@@ -225,9 +226,19 @@ form input,
 form textarea {
   width: 98%;
   max-width: 98%;
-  height: 48px;
   border: none;
   border-radius: 5px;
+}
+
+form input {
+  height: 48px;
+}
+
+form .error-message {
+  color: white;
+  font-size: 12px;
+  padding: 4px 0;
+  display: none;
 }
 
 /* LIGHT-BOX */
@@ -262,13 +273,13 @@ form textarea {
   font-size: 24px;
 }
 
-.light-box-section .fa-chevron-left {
+.light-box-section .chevron-left {
   grid-column: 1;
   grid-row: 3;
   cursor: pointer;
 }
 
-.light-box-section .fa-chevron-right {
+.light-box-section .chevron-right {
   grid-column: 3;
   grid-row: 3;
   cursor: pointer;

@@ -12,7 +12,7 @@ export class Video {
   get createHTML() {
     return `
             <figure id="${this._id}"> 
-              <video class="media" controls alt="${this._title}" tabindex="5">
+              <video class="media" alt="${this._title}" tabindex="5">
                 <source src="assets/images/${this._photographerId}/${this._video}" type="video/webm" >
               </video>
               <figcaption class="media-informations">
