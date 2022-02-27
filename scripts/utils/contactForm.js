@@ -42,7 +42,7 @@ const isFormValid = (form) => {
     return false
   }
 
-  if (!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+  if (!email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)) {
     displayErrorFeedback(emailInput)
     return false
   }
