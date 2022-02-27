@@ -1,15 +1,17 @@
+// Création d'une class Image
 export class Image {
-  constructor(data) {
-    this._id = data.id;
-    this._photographerId = data.photographerId;
-    this._title = data.title;
-    this._image = data.image;
-    this._likes = data.likes;
-    this._date = data.date;
-    this._price = data.price;
+  constructor (data) {
+    this._id = data.id
+    this._photographerId = data.photographerId
+    this._title = data.title
+    this._image = data.image
+    this._likes = data.likes
+    this._date = data.date
+    this._price = data.price
   }
 
-  get createHTML() {
+  // Création d'une méthode pour créer le HTML
+  get createHTML () {
     return `
         <figure id="${this._id}" > 
           <img src="assets/images/${this._photographerId}/${this._image}" 
@@ -27,6 +29,6 @@ export class Image {
             </div>
           </figcaption>
         </figure>
-      `;
+      `
   }
 }

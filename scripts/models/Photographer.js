@@ -1,15 +1,16 @@
-class Photographer {
-  constructor(data) {
-    this._name = data.name;
-    this._id = data.id;
-    this._city = data.city;
-    this._country = data.country;
-    this._tagline = data.tagline;
-    this._price = data.price;
-    this._portrait = data.portrait;
+export class Photographer {
+  constructor (data) {
+    this._name = data.name
+    this._id = data.id
+    this._city = data.city
+    this._country = data.country
+    this._tagline = data.tagline
+    this._price = data.price
+    this._portrait = data.portrait
   }
 
-  get createHTML() {
+  // Création d'une méthode pour créer le HTML
+  get createHTML () {
     return `
         <a href="photographer.html?id=${this._id}" tabindex="1"> 
           <article>
@@ -24,6 +25,6 @@ class Photographer {
             <span aria-label="Prix journalier">${this._price}€/jour</span>
           </article>
         </a>
-      `;
+      `
   }
 }

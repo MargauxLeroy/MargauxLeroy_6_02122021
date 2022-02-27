@@ -58,12 +58,12 @@
       <div class="modal">
         <header>
           <h2>Contactez-moi</h2>
-          <button onclick="closeModal()" tabindex="3"> 
+          <button id="form-close-button" tabindex="3"> 
             <img src="assets/icons/close.svg" alt="Icône croix de fermeture de la modale"/>
           </button>
         </header>
         <form method="get">
-          <div class="form-data">
+          <div class="form-data input-firstName">
             <label for="first-name">Prénom</label>
             <input
               class="text-control"
@@ -72,9 +72,9 @@
               name="first-name"
               tabindex="3"
             />
-            <span class="error-message">Votre prénom doit contenir plus d'un caractère</span>
+            <span class="error-message">Votre prénom doit contenir au moins un caractère</span>
           </div>
-          <div class="form-data">
+          <div class="form-data input-lastName">
             <label for="last-name">Nom</label>
             <input
               class="text-control"
@@ -83,15 +83,15 @@
               name="last-name"
               tabindex="3"
             />
-            <span class="error-message">Votre nom doit contenir plus d'un caractère</span>
+            <span class="error-message">Votre nom doit contenir au moins un caractère</span>
 
           </div>
-          <div class="form-data">
+          <div class="form-data input-email">
             <label for="email">Email</label>
             <input class="text-control" type="email" id="email" name="email" tabindex="3"/>
             <span class="error-message">Votre email doit être valide</span>
           </div>
-          <div class="form-data">
+          <div class="form-data input-message">
             <label for="your-message">Votre message</label>
             <textarea
               class="text-control"
@@ -115,7 +115,6 @@
       <i
         class="fas fa-times"
         alt="Icône de croix"
-        onclick="closeModal()"
         role="icône"></i>
      </button> 
         
@@ -137,14 +136,13 @@
         role="icône de navigation à droite"></i>
       </button>
 
-      <figcaption></figcaption>
+      <h2></h2>
     </div>
-
     <!-- Utils -->
-    <script src="scripts/utils/contactForm.js"></script>
+    <script type="module" src="scripts/utils/contactForm.js"></script>
     <!-- Pages -->
     <script type="module" src="scripts/pages/photographer.js"></script>
     <!-- Models -->
-    <script src="scripts/models/Photographer.js"></script>
+    <script type="module" src="scripts/models/Photographer.js"></script>
   </body>
 </html>

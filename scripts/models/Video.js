@@ -1,15 +1,17 @@
+// Création d'une class Vidéo
 export class Video {
-  constructor(data) {
-    this._id = data.id;
-    this._photographerId = data.photographerId;
-    this._title = data.title;
-    this._video = data.video;
-    this._likes = data.likes;
-    this._date = data.date;
-    this._price = data.price;
+  constructor (data) {
+    this._id = data.id
+    this._photographerId = data.photographerId
+    this._title = data.title
+    this._video = data.video
+    this._likes = data.likes
+    this._date = data.date
+    this._price = data.price
   }
 
-  get createHTML() {
+  // Création d'une méthode pour créer le HTML
+  get createHTML () {
     return `
             <figure id="${this._id}"> 
               <video class="media" alt="${this._title}" tabindex="5">
@@ -24,7 +26,7 @@ export class Video {
                   </button>    
                 </div>
               </figcaption>
-             </figure>
-          `;
+            </figure>
+          `
   }
 }
